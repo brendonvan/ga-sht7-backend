@@ -34,7 +34,7 @@ async function createProfile(req, res) {
     const profile = await Profile.findById(req.params.id)
     profile.push(req.body);
     profile.save()
-    res.json(profile);
+    res.status(200).json(profile);
   }
   catch (error) {
     console.log(error);
