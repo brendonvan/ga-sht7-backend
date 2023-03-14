@@ -2,12 +2,38 @@ import mongoose from 'mongoose'
 
 const Schema = mongoose.Schema
 
-const profileSchema = new Schema({
-  name: String,
-  photo: String,
-  task: {
-    type: Schema.Types.ObjectId, ref: 'task'
+const childSchema = new Schema ({
+  name: {
+    type: String,
+    required: true,
   },
+  score: {
+    type: Number
+  },
+  goal: {
+    type: String
+  },
+  avatar: {
+    type: String,
+  },
+  tasks: [{
+    type: Schema.Types.ObjectId, ref: 'Task'
+  }],
+})
+
+const profileSchema = new Schema({
+  child: [childSchema],
+  passcode: {
+    type: Number,
+    required: true,
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  avatar: {
+    type: String,
+  }
 },{
   timestamps: true,
 })
