@@ -7,6 +7,7 @@ router.get("/", taskCtrl.index);
 router.get("/new", taskCtrl.newTask);
 router.post("/", taskCtrl.create);
 router.delete("/:id", taskCtrl.deleteTask);
+router.delete("/:id", taskCtrl.deleteTask);
 
 
 export { router }

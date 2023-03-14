@@ -29,4 +29,16 @@ function addPhoto(req, res) {
   })
 }
 
-export { index, addPhoto }
+async function createProfile(req, res) {
+  try {
+    const profile = await Profile.findById(req.params.id)
+    profile.push(req.body);
+    profile.save()
+    res.json(profile);
+  }
+  catch (error) {
+    console.log(error);
+  }
+}
+
+export { index, addPhoto, createProfile }

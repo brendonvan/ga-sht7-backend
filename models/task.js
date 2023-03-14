@@ -16,6 +16,9 @@ const taskSchema = new Schema({
         type: Date,
         required: true,
     },
+    score: {
+        type: Number
+    },
     childCompleted: {
         type: Boolean,
         required: true,
