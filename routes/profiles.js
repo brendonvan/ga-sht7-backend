@@ -12,5 +12,6 @@ router.use(decodeUserFromToken)
 router.get('/', checkAuth, profilesCtrl.index)
 router.post('/', profilesCtrl.createProfile);
 router.put('/:id/add-photo', checkAuth, profilesCtrl.addPhoto)
+router.post('/:id/child', checkAuth, profilesCtrl.createChild)
 
 export { router }
