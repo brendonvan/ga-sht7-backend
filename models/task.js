@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 
 const Schema = mongoose.Schema
 
-const budgetSchema = new Schema({
+const taskSchema = new Schema({
     // profile:[{type:ObjectId, ref:"Profile"}],
     name:{
         type: String,
@@ -27,6 +27,6 @@ const budgetSchema = new Schema({
   timestamps: true,
 })
 
-const Budget = mongoose.model('Budget', budgetSchema)
+const Task = mongoose.model('Task', taskSchema)
 
-export { Budget }
+export { Task }
