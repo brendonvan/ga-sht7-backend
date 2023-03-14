@@ -1,32 +1,30 @@
 import mongoose from 'mongoose'
 
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 
 const taskSchema = new Schema({
     // profile:[{type:ObjectId, ref:"Profile"}],
-    name:{
+    taskName: {
         type: String,
         required: true,
     },
-    amount: {
-        type: Number,
+    assignedDate: {
+        type: Date,
         required: true,
     },
-    photo: String,
-    goalName: {
-        type: String,
-        required: true
-    },
-    goalAmount: {
-        type: Number,
+    dueDate: {
+        type: Date,
         required: true,
     },
-    typeOf: String,
-
-},{
-  timestamps: true,
+    childCompleted: {
+        type: Boolean,
+        required: true,
+    },
+    parentApproval: {
+        type: Boolean,
+        defaultValue: false,
+    }
 })
 
 const Task = mongoose.model('Task', taskSchema)
-
 export { Task }
