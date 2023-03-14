@@ -3,22 +3,22 @@ import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 
 const budgetSchema = new Schema({
-    profile:[{type:ObjectId, ref:"Profile"}],
+    // profile:[{type:ObjectId, ref:"Profile"}],
     name:{
-        String,
+        type: String,
         required: true,
     },
     amount: {
-        Number,
+        type: Number,
         required: true,
     },
     photo: String,
     goalName: {
-        String,
+        type: String,
         required: true
     },
     goalAmount: {
-        Number,
+        type: Number,
         required: true,
     },
     typeOf: String,
