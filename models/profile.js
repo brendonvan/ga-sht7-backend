@@ -25,7 +25,6 @@ const profileSchema = new Schema({
   child: [childSchema],
   passcode: {
     type: Number,
-    required: true,
   },
   name: {
     type: String,
