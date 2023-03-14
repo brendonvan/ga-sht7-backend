@@ -55,5 +55,22 @@ async function createChild(req, res) {
   }
 }
 
+async function showChild(req, res) {
+  try {
+    // const profile = await Profile.findById(req.params.id);
+    const profile = await Profile.findById(req.params.id)
+    res.status(200).json(profile);
+  } catch (error) {
+    console.log(error);
+  }
+}
 
-export { index, addPhoto, createProfile, createChild }
+
+
+export { 
+  index, 
+  addPhoto, 
+  createProfile, 
+  createChild,
+  showChild
+}
