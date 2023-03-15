@@ -13,6 +13,9 @@ const childSchema = new Schema ({
   goal: {
     type: String
   },
+  price: {
+    type: Number,
+  },
   avatar: {
     type: String,
   },
