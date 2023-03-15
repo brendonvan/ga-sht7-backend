@@ -1,14 +1,16 @@
 import { Profile } from '../models/profile.js'
 import { v2 as cloudinary } from 'cloudinary'
 
-function index(req, res) {
-  Profile.find({})
-  .then(profiles => res.json(profiles))
-  .catch(err => {
+async function index(req, res) {
+  try {
+    const profile = await Profile.findById(req.params.id)
+    res.json(profile)
+  } catch (error) {
     console.log(err)
     res.status(500).json(err)
-  })
+  }
 }
+
 
 function addPhoto(req, res) {
   const imageFile = req.files.photo.path
@@ -59,7 +61,11 @@ async function showChild(req, res) {
   try {
     // const profile = await Profile.findById(req.params.id);
     const profile = await Profile.findById(req.params.id)
-    res.status(200).json(profile);
+    const child = profile.child.id(req.params.childId)
+    if (!child){
+      return res.status(404).json({ message: 'Child not found'})
+    }
+    res.status(200).json(child);
   } catch (error) {
     console.log(error);
   }
