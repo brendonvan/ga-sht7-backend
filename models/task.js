@@ -28,6 +28,8 @@ const taskSchema = new Schema({
         type: Boolean,
         defaultValue: false,
     }
+}, {
+    timestamps: true,
 })
 
 const Task = mongoose.model('Task', taskSchema)

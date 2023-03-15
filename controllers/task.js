@@ -13,25 +13,28 @@ function newTask(req, res) {
 
 const create = async (req, res) => {
   try {
-    const profile = await Profile.findById(req.params.profileId);
+    const profile = await Profile.findById(req.params.profileId)
     console.log('Profile:', profile.name)
-    console.log('Child:', profile.child[0].name)
+    const children = profile.child
+    const child = children.find(c => c._id.toString() === req.params.childId.toString())
+    console.log('Child:', child)
     const task = await Task.create(req.body)
-    // const child = await profile.child.findById(req.params.childId)
-    if (!profile.child.tasks) {
-      profile.child[0].tasks = [];
+    if (!child.tasks) {
+      child.tasks = []
     }
-    profile.child[0].tasks.push(task);
+    child.tasks.push(task)
     console.log('here')
-    profile.save();
-    console.log('Task:', profile.child[0].tasks)
-    res.json(task);
+    await profile.save()
+    console.log('Task:', child.tasks)
+    res.json(task)
   } catch (error) {
-    console.log(error);
+    console.log(error)
   }
 }
 
 
+
+// const child = children.find(c => c._id.toString() === req.params.childId.toString());
 
 // function create(req, res) {
 //   Task.findById(req.params.id, function(err, task) {
