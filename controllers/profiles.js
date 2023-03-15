@@ -41,4 +41,36 @@ async function createProfile(req, res) {
   }
 }
 
-export { index, addPhoto, createProfile }
+async function createChild(req, res) {
+  try {
+    const profile = await Profile.findById(req.params.id);
+    const child = profile.child.create(req.body)
+    console.log('profile:',profile,'child:', child)
+    profile.child.push(req.body);
+    await child.save();
+    await profile.save();
+    res.status(200).json(profile.child);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function showChild(req, res) {
+  try {
+    // const profile = await Profile.findById(req.params.id);
+    const profile = await Profile.findById(req.params.id)
+    res.status(200).json(profile);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
+
+export { 
+  index, 
+  addPhoto, 
+  createProfile, 
+  createChild,
+  showChild
+}
