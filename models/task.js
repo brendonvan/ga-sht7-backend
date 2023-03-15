@@ -27,7 +27,7 @@ const taskSchema = new Schema({
     parentApproval: {
         type: Boolean,
         defaultValue: false,
-    }
+    },
 }, {
     timestamps: true,
 })
