@@ -59,7 +59,11 @@ async function showChild(req, res) {
   try {
     // const profile = await Profile.findById(req.params.id);
     const profile = await Profile.findById(req.params.id)
-    res.status(200).json(profile);
+    const child = profile.child.id(req.params.childId)
+    if (!child){
+      return res.status(404).json({ message: 'Child not found'})
+    }
+    res.status(200).json(child);
   } catch (error) {
     console.log(error);
   }
