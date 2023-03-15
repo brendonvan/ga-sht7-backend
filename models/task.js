@@ -10,23 +10,26 @@ const taskSchema = new Schema({
     },
     assignedDate: {
         type: Date,
-        required: true,
+        // required: true,
     },
     dueDate: {
         type: Date,
-        required: true,
+        // required: true,
     },
     score: {
         type: Number
     },
     childCompleted: {
         type: Boolean,
-        required: true,
+        default: false,
+        // required: true,
     },
     parentApproval: {
         type: Boolean,
         defaultValue: false,
     }
+}, {
+    timestamps: true,
 })
 
 const Task = mongoose.model('Task', taskSchema)
