@@ -71,6 +71,20 @@ async function showChild(req, res) {
   }
 }
 
+async function updateChild(req, res) {
+  try {
+    const profile = await Profile.findById(req.params.id)
+    const child = profile.child.id(req.params.childId)
+    child.set(req.body)
+    profile.save()
+    res.json(child)
+    }
+    // res.status(200).json(child);
+    catch (error) {
+    console.log(error);
+  }
+}
+
 
 
 export { 
@@ -78,5 +92,6 @@ export {
   addPhoto, 
   createProfile, 
   createChild,
-  showChild
+  showChild,
+  updateChild
 }

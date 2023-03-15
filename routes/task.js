@@ -8,6 +8,7 @@ router.get("/new", taskCtrl.newTask);
 router.post("/:profileId/:childId/create", taskCtrl.create);
 router.put("/:profileId/:childId/:taskId", taskCtrl.updateTask);
 router.delete("/:id", taskCtrl.deleteTask);
+// router.patch()
 
 
 export { router }
