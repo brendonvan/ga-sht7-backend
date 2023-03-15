@@ -32,7 +32,10 @@ const profileSchema = new Schema({
   },
   avatar: {
     type: String,
-  }
+  },
+  tasks: [{
+    type: Schema.Types.ObjectId, ref: 'Task'
+  }],
 },{
   timestamps: true,
 })
