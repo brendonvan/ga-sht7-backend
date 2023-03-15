@@ -32,6 +32,23 @@ const create = async (req, res) => {
   }
 }
 
+const updateTask = async (req, res) => {
+  try {
+    const profile = await Profile.findById(req.params.profileId)
+    console.log('Profile:', profile.name)
+    const children = profile.child
+    const child = children.find(c => c._id.toString() === req.params.childId.toString())
+    const task = await Task.findById(req.params.taskId)
+    task.set(req.body)
+    task.save()
+    res.json(task)
+    
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+
 
 
 // const child = children.find(c => c._id.toString() === req.params.childId.toString());
@@ -77,4 +94,10 @@ function deleteTask(req, res) {
   })
 }
 
-export { index, newTask, create, deleteTask }
+export { 
+  index, 
+  newTask, 
+  create, 
+  deleteTask, 
+  updateTask 
+}
