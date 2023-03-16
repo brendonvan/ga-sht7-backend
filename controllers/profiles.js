@@ -6,8 +6,8 @@ async function index(req, res) {
     const profile = await Profile.findById(req.params.id)
     res.json(profile)
   } catch (error) {
-    console.log(err)
-    res.status(500).json(err)
+    console.log(error)
+    res.status(500).json(error)
   }
 }
 
@@ -45,14 +45,26 @@ async function createProfile(req, res) {
 
 async function createChild(req, res) {
   try {
-    const profile = await Profile.findById(req.params.id);
+    const profile = await Profile.findById(req.params.id)
     const child = profile.child.create(req.body)
     console.log('profile:',profile,'child:', child)
-    profile.child.push(req.body);
-    await child.save();
-    await profile.save();
-    res.status(200).json(profile.child);
+    profile.child.push(req.body)
+    // await child.save()
+    await profile.save()
+    res.status(200).json(profile)
   } catch (error) {
+    console.log(error)
+  }
+}
+
+async function updateProfile(req, res) {
+  try {
+    const profile = await Profile.findByIdAndUpdate(  
+      req.params.id,
+      req.body,
+      { new: true })
+    res.json(profile)
+    } catch (error) {
     console.log(error);
   }
 }
@@ -93,5 +105,6 @@ export {
   createProfile, 
   createChild,
   showChild,
-  updateChild
+  updateChild,
+  updateProfile
 }

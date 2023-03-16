@@ -15,5 +15,6 @@ router.put('/:id/add-photo', checkAuth, profilesCtrl.addPhoto)
 router.post('/:id/child', checkAuth, profilesCtrl.createChild)
 router.get('/:id/:childId', checkAuth, profilesCtrl.showChild)
 router.put('/:id/:childId', checkAuth, profilesCtrl.updateChild)
+router.patch('/:id', checkAuth, profilesCtrl.updateProfile)
 
 export { router }
