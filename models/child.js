@@ -23,7 +23,9 @@ const childSchema = new Schema({
     type: Schema.Types.ObjectId, ref: 'Task'
   }],
   parent: {
-    type: Schema.Types.ObjectId, ref: 'Profile'
+    type: Schema.Types.ObjectId, 
+    ref: 'Profile', 
+    required: true
   },
 })
 
