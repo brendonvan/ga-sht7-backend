@@ -50,16 +50,22 @@ async function create(req, res) {
 
 async function show(req, res) {
   try {
+    const user = await User.findById(req.user._id).populate('profile')
     const child = await Child.findById(req.params.id)
-    .populate('tasks')
+      .populate('tasks')
     if (!child){
       return res.status(404).json({ message: 'Child not found'})
     }
-    res.status(200).json(child)
+    if (child.parent.equals(user.profile._id)){
+      res.status(200).json(child)
+    } else {
+      res.status(403).json({ message: 'You are not authorized to access this child'})
+    }
   } catch (error) {
     console.log(error)
   }
 }
+
 
 async function update(req, res) {
   try {
