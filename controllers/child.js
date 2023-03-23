@@ -69,17 +69,14 @@ async function show(req, res) {
 
 async function update(req, res) {
   try {
-    // const profile = await Profile.findById(req.params.id)
-    const child = await Child.findByIdAndUpdate(req.params.id, req.body, {new: true})
-    child.set(req.body)
-    child.save()
+    const child = await Child.findByIdAndUpdate(req.params.id, req.body, { new: true })
     res.json(child)
-    }
-    // res.status(200).json(child);
-    catch (error) {
-    console.log(error);
+  } catch (error) {
+    console.log(error)
+    res.status(500).json(error)
   }
 }
+
 
 
 

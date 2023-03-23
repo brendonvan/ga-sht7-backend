@@ -19,6 +19,6 @@ router.get('/', checkAuth, childCtrl.index)
 //fetch child
 router.get('/:id', checkAuth, childCtrl.show)
 //update child
-router.put('/:id', checkAuth, childCtrl.update)
+router.patch('/:id', checkAuth, childCtrl.update)
 
 export { router }
