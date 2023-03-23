@@ -50,7 +50,7 @@ async function create(req, res) {
 
 async function show(req, res) {
   try {
-    const child = Child.findById(req.params.id)
+    const child = await Child.findById(req.params.id)
     .populate('tasks')
     if (!child){
       return res.status(404).json({ message: 'Child not found'})
