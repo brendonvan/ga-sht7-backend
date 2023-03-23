@@ -6,7 +6,7 @@ import { v2 as cloudinary } from 'cloudinary'
 async function index(req, res) {
   try {
     const profile = await Profile.findById(req.params.id)
-    const children = profile.child
+    const children = profile.children
     res.json(children)
   } catch (error) {
     console.log(error)
@@ -17,7 +17,7 @@ async function index(req, res) {
 async function create(req, res) {
   try {
     const profile = await Profile.findById(req.params.id)
-    const child = profile.child.create(req.body)
+    const child = profile.children.create(req.body)
     // console.log('profile:',profile,'child:', child)
     profile.child.push(req.body)
     // await child.save()
@@ -30,7 +30,7 @@ async function create(req, res) {
 
 async function show(req, res) {
   try {
-    const child = child.findById(req.params.id)
+    const child = Child.findById(req.params.id)
     if (!child){
       return res.status(404).json({ message: 'Child not found'})
     }

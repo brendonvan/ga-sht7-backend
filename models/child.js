@@ -22,9 +22,9 @@ const childSchema = new Schema({
   tasks: [{
     type: Schema.Types.ObjectId, ref: 'Task'
   }],
-  parent: [{
+  parent: {
     type: Schema.Types.ObjectId, ref: 'Profile'
-  }],
+  },
 })
 
 

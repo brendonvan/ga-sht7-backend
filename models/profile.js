@@ -4,14 +4,14 @@ const Schema = mongoose.Schema
 
 
 const profileSchema = new Schema({
-  child: [{
+  children: [{
     type: Schema.Types.ObjectId, ref: 'Child'
   }],
   passcode: {
     type: Number,
   },
   name: {
-      type: Schema.Types.ObjectId, ref: "Profile",
+    type: String,
   },
   avatar: {
     type: String,
