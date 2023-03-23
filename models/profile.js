@@ -5,7 +5,8 @@ const Schema = mongoose.Schema
 
 const profileSchema = new Schema({
   children: [{
-    type: Schema.Types.ObjectId, ref: 'Child'
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Child'
   }],
   passcode: {
     type: Number,

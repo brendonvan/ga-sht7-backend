@@ -1,6 +1,17 @@
 import { Profile } from '../models/profile.js'
 import { v2 as cloudinary } from 'cloudinary'
 
+
+async function index(req, res) {
+  try {
+    const profile = await Profile.find({})
+    res.json(profile)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json(error)
+  }
+}
+
 //! find logged in parent
 async function show(req, res) {
   try {
@@ -42,5 +53,6 @@ async function update(req, res) {
 export { 
   show, 
   create, 
-  update
+  update,
+  index
 }
