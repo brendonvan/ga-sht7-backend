@@ -6,9 +6,9 @@ const router = Router();
 // show all tasks
 router.get("/", taskCtrl.index);
 // create new task
-router.post("/:profileId/:childId/create", taskCtrl.create);
+router.post("/", taskCtrl.create);
 // update task
-router.put("/:profileId/:childId/:taskId", taskCtrl.updateTask);
+router.put("/:id", taskCtrl.update);
 // delete task
 router.delete("/:id", taskCtrl.deleteTask);
 

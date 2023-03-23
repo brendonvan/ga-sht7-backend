@@ -7,16 +7,13 @@ function index(req, res) {
   });
 }
 
-function newTask(req, res) {
-  res.render("task/new", { title: "Add Task" });
-}
 
 const create = async (req, res) => {
   try {
-    const profile = await Profile.findById(req.params.profileId)
+    const profile = await Profile.findById(req.params.id)
     console.log('Profile:', profile.name)
-    const children = profile.child
-    const child = children.find(c => c._id.toString() === req.params.childId.toString())
+    const children = profile.children
+    const child = children.find(c => c._id.toString() === req.params.id.toString())
     console.log('Child:', child)
     const task = await Task.create(req.body)
     if (!child.tasks) {
@@ -32,11 +29,11 @@ const create = async (req, res) => {
   }
 }
 
-const updateTask = async (req, res) => {
+const update = async (req, res) => {
   try {
-    const profile = await Profile.findById(req.params.profileId)
+    const profile = await Profile.findById(req.params.Id)
     console.log('Profile:', profile.name)
-    const children = profile.child
+    const children = profile.children
     const child = children.find(c => c._id.toString() === req.params.childId.toString())
     const task = await Task.findById(req.params.taskId)
     task.set(req.body)
@@ -47,48 +44,6 @@ const updateTask = async (req, res) => {
     console.log(error)
   }
 }
-
-// const addTaskToChild = async (req, res) => {
-//   try {
-//     const task = await Task 
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }
-
-
-
-
-// const child = children.find(c => c._id.toString() === req.params.childId.toString());
-
-// function create(req, res) {
-//   Task.findById(req.params.id, function(err, task) {
-//   var task = new Task(req.body);
-//   task.save(function(err) {
-//     if (err) return res.redirect('/task/new');
-//     res.redirect("/task");
-//     });
-//   });
-// }
-
-// function create(req, res) {
-//   const taskId = req.params.id;
-//   const childId = req.params.profile.childId;
-//   const newTask = new Task({
-//     taskName: req.body.taskName,
-//     assignedDate: req.body.assignedDate,
-//     dueDate: req.body.dueDate,
-//     score: req.body.score,
-//   });
-//   newTask.save()
-//     .then(result => {
-//       res.redirect("/task");
-//     })
-//     .catch(err => {
-//       console.log(err);
-//       res.redirect("/task");
-//     });
-// }
 
 
 function deleteTask(req, res) {
@@ -104,8 +59,7 @@ function deleteTask(req, res) {
 
 export { 
   index, 
-  newTask, 
   create, 
   deleteTask, 
-  updateTask 
+  update 
 }
