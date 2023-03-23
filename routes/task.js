@@ -3,12 +3,15 @@ import * as taskCtrl from '../controllers/task.js'
 
 const router = Router();
 
+// show all tasks
 router.get("/", taskCtrl.index);
-router.get("/new", taskCtrl.newTask);
+// create new task
 router.post("/:profileId/:childId/create", taskCtrl.create);
+// update task
 router.put("/:profileId/:childId/:taskId", taskCtrl.updateTask);
+// delete task
 router.delete("/:id", taskCtrl.deleteTask);
-// router.patch()
+
 
 
 export { router }
