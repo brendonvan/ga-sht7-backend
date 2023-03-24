@@ -7,7 +7,7 @@ const taskSchema = new Schema({
     type: String,
     required: true,
   },
-  price: {
+  value: {
     type: Number,
   },
   assignedDate: {
@@ -27,14 +27,14 @@ const childSchema = new Schema({
   name: {
     type: String,
   },
-  score: {
+  currentScore: {
     type: Number
   },
-  goal: {
-    type: String
+  goalScore: {
+    type: Number
   },
-  price: {
-    type: Number,
+  goalItem: {
+    type: String,
   },
   avatar: {
     type: String,

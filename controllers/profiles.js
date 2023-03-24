@@ -15,7 +15,7 @@ async function index(req, res) {
 //! find logged in parent
 async function show(req, res) {
   try {
-    const profile = await Profile.findById(req.params.id)
+    const profile = await Profile.findById(req.params.id).populate('children')
     res.json(profile)
   } catch (error) {
     console.log(error)

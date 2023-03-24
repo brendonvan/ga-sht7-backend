@@ -53,13 +53,13 @@ async function show(req, res) {
     const user = await User.findById(req.user._id).populate('profile')
     const child = await Child.findById(req.params.id)
       .populate('tasks')
-    if (!child){
-      return res.status(404).json({ message: 'Child not found'})
+    if (!child) {
+      return res.status(404).json({ message: 'Child not found' })
     }
-    if (child.parent.equals(user.profile._id)){
+    if (child.parent.equals(user.profile._id)) {
       res.status(200).json(child)
     } else {
-      res.status(403).json({ message: 'You are not authorized to access this child'})
+      res.status(403).json({ message: 'You are not authorized to access this child' })
     }
   } catch (error) {
     console.log(error)
@@ -194,20 +194,23 @@ async function updateTask(req, res) {
 
 
 
-function deleteTask(req, res) {
-  const id = req.params.id;
-  Task.findByIdAndDelete(id)
-  .then(result => {
-    res.json({ redirect: '/task' })
-  })
-  .catch(err => {
-    console.log(err);
-  })
+async function deleteTask(req, res) {
+  try {
+    const child = await Child.findById(req.params.childId).populate('tasks')
+    console.log(child)
+    const task = child.tasks.id(req.params.id)
+    console.log(task)
+    child.tasks.remove(task)
+    child.save()
+    res.json(child)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json(error)
+  }
 }
 
-
-export { 
-  index, 
+export {
+  index,
   create,
   show,
   update,
