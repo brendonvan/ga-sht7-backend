@@ -25,15 +25,15 @@ router.patch('/:id', checkAuth, childCtrl.update)
 
 //? Task
 // create task
-router.post('/:childId', checkAuth.createTask)
+router.post('/:childId', checkAuth, childCtrl.createTask)
 // featch all tasks
-router.get('/:childId', childCtrl.indexTask)
+router.get('/:childId', checkAuth, childCtrl.indexTask)
 // show task
-router.get('/:child/:id', childCtrl.showTask)
+router.get('/:childId/:id', checkAuth, childCtrl.showTask)
 // update task
-router.get('/:child/:id', checkAuth.updateTask)
+router.patch('/:childId/:id', checkAuth, childCtrl.updateTask)
 // delete task
-router.get('/:child/:id', checkAuth.deleteTask)
+router.delete('/:childId/:id', checkAuth, childCtrl.deleteTask)
 
 
 export { router }

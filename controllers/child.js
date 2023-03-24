@@ -79,10 +79,141 @@ async function update(req, res) {
 
 
 
+//! Tasks
+
+async function indexTask(req, res) {
+  try {
+    const child = await Child.findById(req.params.childId).populate('tasks')
+    if (!child) {
+      return res.status(404).json({ message: 'Child not found' })
+    }
+    if (!child.parent._id.equals(req.user.profile)) {
+      return res.status(403).json({ message: 'You are not authorized to access this child' })
+    }
+    res.status(200).json(child.tasks)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json(error)
+  }
+}
+
+
+async function showTask(req, res) {
+  try {
+    const child = await Child.findById(req.params.childId).populate('tasks')
+    if (!child) {
+      return res.status(404).json({ message: 'Child not found' })
+    }
+    if (!child.parent._id.equals(req.user.profile)) {
+      return res.status(403).json({ message: 'You are not authorized to access this child' })
+    }
+    const task = child.tasks.id(req.params.id)
+    if (!task) {
+      return res.status(404).json({ message: 'Task not found' })
+    }
+    res.status(200).json(task)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json(error)
+  }
+}
+
+
+
+// async function createTask(req, res) {
+//   try {
+//     const child = await Child.findById(req.params.childId).populate('parent')
+//     if (!child) {
+//       return res.status(404).json({ message: 'Child not found' })
+//     }
+//     if (!child.parent._id.equals(req.user.profile)) {
+//       return res.status(403).json({ message: 'You are not authorized to access this child' })
+//     }
+//     const task = new Child.tasks(req.body)
+//     child.tasks.push(task)
+//     await child.save()
+//     res.status(200).json(task)
+//   } catch (error) {
+//     console.log(error)
+//     res.status(500).json(error)
+//   }
+// }
+async function createTask(req, res) {
+  try {
+    const child = await Child.findById(req.params.childId).populate('parent')
+    if (!child) {
+      return res.status(404).json({ message: 'Child not found' })
+    }
+    if (!child.parent._id.equals(req.user.profile)) {
+      return res.status(403).json({ message: 'You are not authorized to access this child' })
+    }
+    child.tasks.push(req.body)
+    await child.save()
+    res.json(child)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json(error)
+  }
+}
+
+
+// async function createTask(req, res) {
+//   Child.findById(req.params.id)
+//   .then(child => {
+//     child.tasks.push(req.body)
+//     child.save()
+//   })
+//   .catch(err =>{
+//     console.log(err)
+//     res.redirect('/')
+//   })
+// }
+
+
+async function updateTask(req, res) {
+  try {
+    const child = await Child.findById(req.params.childId).populate('tasks')
+    if (!child) {
+      return res.status(404).json({ message: 'Child not found' })
+    }
+    if (!child.parent._id.equals(req.user.profile)) {
+      return res.status(403).json({ message: 'You are not authorized to access this child' })
+    }
+    const task = child.tasks.id(req.params.id)
+    if (!task) {
+      return res.status(404).json({ message: 'Task not found' })
+    }
+    task.set(req.body)
+    await child.save()
+    res.status(200).json(task)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json(error)
+  }
+}
+
+
+
+function deleteTask(req, res) {
+  const id = req.params.id;
+  Task.findByIdAndDelete(id)
+  .then(result => {
+    res.json({ redirect: '/task' })
+  })
+  .catch(err => {
+    console.log(err);
+  })
+}
+
 
 export { 
   index, 
   create,
   show,
   update,
+  indexTask,
+  createTask,
+  showTask,
+  updateTask,
+  deleteTask
 }
