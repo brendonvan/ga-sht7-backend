@@ -23,7 +23,6 @@ async function show(req, res) {
   }
 }
 
-
 async function create(req, res) {
   try {
     const profile = await Profile.findById(req.params.id)
@@ -54,5 +53,5 @@ export {
   show, 
   create, 
   update,
-  index
+  index,
 }
