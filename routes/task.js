@@ -4,13 +4,13 @@ import * as taskCtrl from '../controllers/task.js'
 const router = Router();
 
 // show all tasks
-router.get("/", taskCtrl.index);
+router.get("/:id", taskCtrl.index);
 // create new task
-router.post("/", taskCtrl.create);
+router.post("/:id", taskCtrl.create);
 // update task
-router.put("/:id", taskCtrl.update);
+router.put("/:id/:id", taskCtrl.update);
 // delete task
-router.delete("/:id", taskCtrl.deleteTask);
+router.delete("/:id/:id", taskCtrl.deleteTask);
 
 
 

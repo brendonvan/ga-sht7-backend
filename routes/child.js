@@ -21,4 +21,19 @@ router.get('/:id', checkAuth, childCtrl.show)
 //update child
 router.patch('/:id', checkAuth, childCtrl.update)
 
+
+
+//? Task
+// create task
+router.post('/:childId', checkAuth.createTask)
+// featch all tasks
+router.get('/:childId', childCtrl.indexTask)
+// show task
+router.get('/:child/:id', childCtrl.showTask)
+// update task
+router.get('/:child/:id', checkAuth.updateTask)
+// delete task
+router.get('/:child/:id', checkAuth.deleteTask)
+
+
 export { router }

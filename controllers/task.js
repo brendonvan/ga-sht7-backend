@@ -10,6 +10,7 @@ function index(req, res) {
 
 const create = async (req, res) => {
   try {
+    console.log(1, req.params.id)
     const profile = await Profile.findById(req.params.id)
     console.log('Profile:', profile.name)
     const children = profile.children
@@ -31,11 +32,11 @@ const create = async (req, res) => {
 
 const update = async (req, res) => {
   try {
-    const profile = await Profile.findById(req.params.Id)
+    const profile = await Profile.findById(req.params.id)
     console.log('Profile:', profile.name)
     const children = profile.children
     const child = children.find(c => c._id.toString() === req.params.childId.toString())
-    const task = await Task.findById(req.params.taskId)
+    const task = await Task.findById(req.params.id)
     task.set(req.body)
     task.save()
     res.json(task)
