@@ -6,15 +6,19 @@ const router = Router()
 
 /*---------- Public Routes ----------*/
 
+// create profile
+router.post('/', profilesCtrl.create)
 
 /*---------- Protected Routes ----------*/
 router.use(decodeUserFromToken)
-router.get('/:id', checkAuth, profilesCtrl.index)
-router.post('/', profilesCtrl.createProfile);
-router.put('/:id/add-photo', checkAuth, profilesCtrl.addPhoto)
-router.post('/:id/child', checkAuth, profilesCtrl.createChild)
-router.get('/:id/:childId', checkAuth, profilesCtrl.showChild)
-router.put('/:id/:childId', checkAuth, profilesCtrl.updateChild)
-router.patch('/:id', checkAuth, profilesCtrl.updateProfile)
+
+//! Parent
+//fetch all profiles
+router.get('/', checkAuth, profilesCtrl.index)
+// fetch specific profile
+router.get('/:id', checkAuth, profilesCtrl.show)
+//update profile
+router.patch('/:id', checkAuth, profilesCtrl.update)
+
 
 export { router }
