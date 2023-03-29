@@ -28,13 +28,16 @@ const childSchema = new Schema({
     type: String,
   },
   currentScore: {
-    type: Number
+    type: Number,
+    default: 0, 
   },
   goalScore: {
-    type: Number
+    type: Number,
+    default: 0,
   },
   goalItem: {
     type: String,
+    default: '',
   },
   avatar: {
     type: String,
