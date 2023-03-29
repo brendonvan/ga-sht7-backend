@@ -27,7 +27,7 @@ router.patch('/:id', checkAuth, childCtrl.update)
 // create task
 router.post('/:childId', checkAuth, childCtrl.createTask)
 // featch all tasks
-router.get('/:childId', checkAuth, childCtrl.indexTask)
+router.get('/tasks/:childId', checkAuth, childCtrl.indexTask)
 // show task
 router.get('/:childId/:id', checkAuth, childCtrl.showTask)
 // update task
