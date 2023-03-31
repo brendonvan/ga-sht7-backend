@@ -137,7 +137,9 @@ async function updateTask(req, res) {
     if (!task) {
       return res.status(404).json({ message: 'Task not found' })
     }
-    task.set(req.body)
+    task.value = req.body.taskReward
+    console.log(task)
+    console.log(req.body.taskReward);
     await child.save()
     res.status(200).json(task)
   } catch (error) {
