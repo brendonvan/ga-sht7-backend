@@ -154,7 +154,13 @@ async function deleteTask(req, res) {
   try {
     const child = await Child.findById(req.params.childId).populate('tasks')
     const task = child.tasks.id(req.params.id)
-    child.tasks.remove(task)
+    
+    if(task){
+      if(child.tasks.includes(task)) {
+        child.tasks.remove(task)
+      }
+    }
+
     child.save()
     res.json(child)
   } catch (error) {
